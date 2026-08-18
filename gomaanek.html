@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GomaaneK | Share Your Experience</title>
+    <meta
+      name="description"
+      content="Share your experience with GomaaneK through a written or video testimonial."
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background:
+          radial-gradient(
+            circle at top right,
+            rgba(190, 160, 90, 0.12),
+            transparent 35%
+          ),
+          linear-gradient(135deg, #071512, #10251f 55%, #071512);
+        min-height: 100vh;
+        color: #fff;
+        padding: 30px 16px;
+      }
+      .page {
+        width: 100%;
+        max-width: 760px;
+        margin: auto;
+      }
+      .card {
+        background: rgba(255, 255, 255, 0.97);
+        color: #17201d;
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
+      }
+      .brand {
+        text-align: center;
+        margin-bottom: 28px;
+      }
+      .brand-name {
+        font-size: 34px;
+        font-weight: 800;
+        letter-spacing: 3px;
+        color: #b18b3d;
+      }
+      .tagline {
+        margin-top: 5px;
+        font-size: 13px;
+        letter-spacing: 3px;
+        color: #6d746f;
+        font-style: italic;
+      }
+      .title {
+        text-align: center;
+        font-size: 30px;
+        margin-bottom: 12px;
+        color: #17201d;
+      }
+      .intro {
+        text-align: center;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 35px;
+      }
+      .form-group {
+        margin-bottom: 23px;
+      }
+      label {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 9px;
+        color: #26312d;
+      }
+      .required {
+        color: #b18b3d;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid #d8ddd9;
+        border-radius: 12px;
+        padding: 14px 15px;
+        font-size: 15px;
+        outline: none;
+        background: #fff;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #b18b3d;
+        box-shadow: 0 0 0 3px rgba(177, 139, 61, 0.12);
+      }
+      textarea {
+        min-height: 130px;
+        resize: vertical;
+      }
+      .video-section {
+        margin-top: 30px;
+        padding: 22px;
+        background: #f6f7f5;
+        border-radius: 18px;
+        border: 1px solid #e2e5e2;
+      }
+      .video-title {
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 7px;
+      }
+      .video-description {
+        color: #6c726e;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 18px;
+      }
+      .camera-box {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/9;
+        background: #071512;
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #cameraPreview,
+      #recordedVideo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+      }
+      #cameraPlaceholder {
+        color: #aeb6b1;
+        text-align: center;
+        padding: 20px;
+      }
+      .recording-indicator {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: #c62828;
+        color: #fff;
+        padding: 7px 12px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 700;
+        display: none;
+        z-index: 5;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      button {
+        border: 0;
+        border-radius: 10px;
+        padding: 13px 18px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      button:hover {
+        transform: translateY(-1px);
+      }
+      .btn-primary {
+        background: #b18b3d;
+        color: #fff;
+      }
+      .btn-danger {
+        background: #9f2929;
+        color: #fff;
+      }
+      .btn-secondary {
+        background: #263b35;
+        color: #fff;
+      }
+      .btn-light {
+        background: #e7ebe8;
+        color: #26312d;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .status {
+        margin-top: 12px;
+        min-height: 20px;
+        font-size: 13px;
+        color: #666;
+      }
+      .consent {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        margin: 25px 0;
+        font-size: 13px;
+        color: #666;
+        line-height: 1.5;
+      }
+      .consent input {
+        width: auto;
+        margin-top: 3px;
+      }
+      .submit-btn {
+        width: 100%;
+        padding: 16px;
+        font-size: 16px;
+        background: linear-gradient(135deg, #b18b3d, #8f6d2d);
+        color: #fff;
+        border-radius: 13px;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 22px;
+        color: #8e9893;
+        font-size: 12px;
+      }
+      .success {
+        display: none;
+        text-align: center;
+        padding: 35px 10px;
+      }
+      .success-icon {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 18px;
+        border-radius: 50%;
+        background: #e8f1e8;
+        color: #3b7542;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 34px;
+      }
+      .success h2 {
+        margin-bottom: 10px;
+      }
+      .success p {
+        color: #666;
+        line-height: 1.6;
+      }
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+        .card {
+          padding: 25px 18px;
+          border-radius: 18px;
+        }
+        .brand-name {
+          font-size: 27px;
+        }
+        .title {
+          font-size: 24px;
+        }
+        .controls button {
+          flex: 1 1 calc(50% - 10px);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <div class="card">
+        <div class="brand">
+          <div class="brand-name">GOMAANEK</div>
+          <div class="tagline">STEPPING AHEAD</div>
+        </div>
+
+        <div id="mainContent">
+          <h1 class="title">We Value Your Feedback</h1>
+          <p class="intro">
+            Thank you for choosing GomaaneK. We'd love to hear about your
+            experience with our service.
+          </p>
+
+          <form id="reviewForm">
+            <div class="form-group">
+              <label for="name"
+                >Your Name <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="company">Company Name</label>
+              <input
+                type="text"
+                id="company"
+                placeholder="Enter your company name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="service"
+                >Service Used <span class="required">*</span></label
+              >
+              <select id="service" required>
+                <option value="">Select a service</option>
+                <option>GST Filing</option>
+                <option>ITR Filing</option>
+                <option>GST Registration</option>
+                <option>Company Incorporation</option>
+                <option>Business Setup</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="review">How did you find our service?</label>
+              <textarea
+                id="review"
+                placeholder="Please share a few words about your experience with GomaaneK..."
+              ></textarea>
+            </div>
+
+            <div class="video-section">
+              <div class="video-title">Video Testimonial</div>
+              <div class="video-description">
+                We'd love to hear directly from you. Record a short video about
+                your experience with GomaaneK.
+              </div>
+
+              <div class="camera-box">
+                <div id="recordingIndicator" class="recording-indicator">
+                  ● RECORDING
+                </div>
+                <div id="cameraPlaceholder">
+                  Camera preview will appear here
+                </div>
+                <video id="cameraPreview" autoplay muted playsinline></video>
+                <video id="recordedVideo" controls playsinline></video>
+              </div>
+
+              <div class="controls">
+                <button type="button" id="startCamera" class="btn-secondary">
+                  📷 Open Camera
+                </button>
+                <button
+                  type="button"
+                  id="startRecording"
+                  class="btn-primary"
+                  disabled
+                >
+                  🎥 Start Recording
+                </button>
+                <button
+                  type="button"
+                  id="stopRecording"
+                  class="btn-danger"
+                  disabled
+                >
+                  ⏹ Stop Recording
+                </button>
+                <button type="button" id="retake" class="btn-light" disabled>
+                  🔄 Retake
+                </button>
+              </div>
+
+              <div id="status" class="status"></div>
+            </div>
+
+            <div class="consent">
+              <input type="checkbox" id="consent" required />
+              <label for="consent"
+                >I give GomaaneK permission to use my feedback and testimonial
+                for marketing and promotional purposes.</label
+              >
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Your Review</button>
+          </form>
+        </div>
+
+        <div id="successMessage" class="success">
+          <div class="success-icon">✓</div>
+          <h2>Thank You!</h2>
+          <p>
+            Your testimonial has been submitted successfully. We truly
+            appreciate your valuable feedback.
+          </p>
+        </div>
+      </div>
+      <div class="footer">© GomaaneK. All Rights Reserved.</div>
+    </div>
+
+    <script>
+      const APPS_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbwlRQ5J0A6omnQYL_gCE5EH2YR4KvP7mqrZKS9Ho_f0HHa-Jz6Q8BMGbW2gaSTRSIMq/exec";
+
+      const startCameraBtn = document.getElementById("startCamera");
+      const startRecordingBtn = document.getElementById("startRecording");
+      const stopRecordingBtn = document.getElementById("stopRecording");
+      const retakeBtn = document.getElementById("retake");
+      const cameraPreview = document.getElementById("cameraPreview");
+      const recordedVideo = document.getElementById("recordedVideo");
+      const cameraPlaceholder = document.getElementById("cameraPlaceholder");
+      const recordingIndicator = document.getElementById("recordingIndicator");
+      const status = document.getElementById("status");
+
+      let cameraStream = null;
+      let mediaRecorder = null;
+      let recordedChunks = [];
+      let recordedBlob = null;
+
+      startCameraBtn.addEventListener("click", async () => {
+        try {
+          cameraStream = await navigator.mediaDevices.getUserMedia({
+            video: {
+              facingMode: "user",
+              width: { ideal: 1280 },
+              height: { ideal: 720 },
+            },
+            audio: true,
+          });
+          cameraPreview.srcObject = cameraStream;
+          cameraPlaceholder.style.display = "none";
+          cameraPreview.style.display = "block";
+          recordedVideo.style.display = "none";
+          startCameraBtn.disabled = true;
+          startRecordingBtn.disabled = false;
+          status.textContent = "Camera is ready. You can start recording.";
+        } catch (error) {
+          console.error(error);
+          status.textContent =
+            "Camera permission was denied or your browser does not support camera access.";
+        }
+      });
+
+      startRecordingBtn.addEventListener("click", () => {
+        if (!cameraStream) return;
+        recordedChunks = [];
+        let options = {};
+        if (MediaRecorder.isTypeSupported("video/webm;codecs=vp9,opus"))
+          options.mimeType = "video/webm;codecs=vp9,opus";
+        else if (MediaRecorder.isTypeSupported("video/webm;codecs=vp8,opus"))
+          options.mimeType = "video/webm;codecs=vp8,opus";
+        else options.mimeType = "video/webm";
+
+        mediaRecorder = new MediaRecorder(cameraStream, options);
+
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
+          recordedVideo.src = URL.createObjectURL(recordedBlob);
+          cameraPreview.style.display = "none";
+          recordedVideo.style.display = "block";
+          recordingIndicator.style.display = "none";
+          retakeBtn.disabled = false;
+          status.textContent =
+            "Recording complete. Preview it or retake the video.";
+        };
+
+        mediaRecorder.start();
+        startRecordingBtn.disabled = true;
+        stopRecordingBtn.disabled = false;
+        retakeBtn.disabled = true;
+        recordingIndicator.style.display = "block";
+        status.textContent = "Recording in progress...";
+      });
+
+      stopRecordingBtn.addEventListener("click", () => {
+        if (mediaRecorder && mediaRecorder.state !== "inactive")
+          mediaRecorder.stop();
+        stopRecordingBtn.disabled = true;
+      });
+
+      retakeBtn.addEventListener("click", () => {
+        recordedBlob = null;
+        recordedChunks = [];
+        recordedVideo.pause();
+        recordedVideo.removeAttribute("src");
+        recordedVideo.load();
+        recordedVideo.style.display = "none";
+        cameraPreview.style.display = "block";
+        retakeBtn.disabled = true;
+        startRecordingBtn.disabled = false;
+        status.textContent = "Ready to record again.";
+      });
+
+      function blobToBase64(blob) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result.split(",")[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+      }
+
+      document
+        .getElementById("reviewForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value.trim();
+          const company = document.getElementById("company").value.trim();
+          const service = document.getElementById("service").value;
+          const review = document.getElementById("review").value.trim();
+          const consent = document.getElementById("consent").checked;
+          const submitButton = document.querySelector(".submit-btn");
+
+          if (!name) {
+            alert("Please enter your name.");
+            return;
+          }
+          if (!service) {
+            alert("Please select the service you used.");
+            return;
+          }
+          if (!recordedBlob) {
+            alert("Please record a video testimonial before submitting.");
+            return;
+          }
+          if (!consent) {
+            alert("Please accept the testimonial permission.");
+            return;
+          }
+
+          submitButton.disabled = true;
+          submitButton.textContent = "Uploading...";
+
+          try {
+            const videoBase64 = await blobToBase64(recordedBlob);
+
+            const payload = {
+              name: name,
+              company: company,
+              service: service,
+              review: review,
+              consent: "Yes",
+              videoBase64: videoBase64,
+              videoType: "video/webm",
+            };
+
+            await fetch(APPS_SCRIPT_URL, {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "text/plain;charset=utf-8" },
+              body: JSON.stringify(payload),
+            });
+
+            // no-cors responses are intentionally opaque, so do not try to read response.json().
+            // The Apps Script Web App receives the POST and saves the video/details.
+            document.getElementById("mainContent").style.display = "none";
+            document.getElementById("successMessage").style.display = "block";
+            stopCamera();
+          } catch (error) {
+            console.error(error);
+            alert(
+              "Something went wrong while uploading your testimonial. Please try again.",
+            );
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit Your Review";
+          }
+        });
+
+      function stopCamera() {
+        if (cameraStream) {
+          cameraStream.getTracks().forEach((track) => track.stop());
+          cameraStream = null;
+        }
+      }
+      window.addEventListener("beforeunload", stopCamera);
+    </script>
+  </body>
+</html>
