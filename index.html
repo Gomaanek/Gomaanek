@@ -98,10 +98,30 @@
         border-color: #b18b3d;
         box-shadow: 0 0 0 3px rgba(177, 139, 61, 0.12);
       }
-      textarea {
-        min-height: 130px;
-        resize: vertical;
-      }
+      .google-review-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #b18b3d, #8f6d2d);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 13px;
+  font-size: 16px;
+  font-weight: 700;
+  transition: 0.2s ease;
+  box-shadow: 0 8px 20px rgba(177, 139, 61, 0.2);
+}
+
+.google-review-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(177, 139, 61, 0.3);
+}
+
+.google-review-btn:active {
+  transform: translateY(0);
+}
       .video-section {
         margin-top: 30px;
         padding: 22px;
@@ -328,17 +348,17 @@
             </div>
 
             <div class="form-group">
-              <label for="review"
-                >How did you find our service?<span class="required"
-                  >*</span
-                ></label
-              >
-              <textarea
-                id="review"
-                placeholder="Please share a few words about your experience with GomaaneK..."
-              ></textarea>
-            </div>
+              <label>How was your experience with us?</label>
 
+              <a
+                href="https://g.page/r/CdNE_wDuXLbEEBM/review"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="google-review-btn"
+              >
+                ⭐ How was your experience with us?
+              </a>
+            </div>
             <div class="video-section">
               <div class="video-title">Video Testimonial</div>
               <div class="video-description">
@@ -523,7 +543,7 @@
           const name = document.getElementById("name").value.trim();
           const company = document.getElementById("company").value.trim();
           const service = document.getElementById("service").value;
-          const review = document.getElementById("review").value.trim();
+          
           const consent = document.getElementById("consent").checked;
           const submitButton = document.querySelector(".submit-btn");
 
@@ -554,7 +574,7 @@
               name: name,
               company: company,
               service: service,
-              review: review,
+              
               consent: "Yes",
               videoBase64: videoBase64,
               videoType: "video/webm",
