@@ -122,6 +122,14 @@
 .google-review-btn:active {
   transform: translateY(0);
 }
+      .review-note {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+        line-height: 1.5;
+      }
+
       .video-section {
         margin-top: 30px;
         padding: 22px;
@@ -348,7 +356,7 @@
             </div>
 
             <div class="form-group">
-              <label>How was your experience with us?</label>
+              <label>How was your experience with us?<span class="required">*</span></label>
 
               <a
                 href="https://g.page/r/CdNE_wDuXLbEEBM/review"
@@ -358,6 +366,10 @@
               >
                 ⭐ How was your experience with us?
               </a>
+
+              <div class="review-note">
+                After submitting your Google Review, return to this page to complete your testimonial.
+              </div>
             </div>
             <div class="video-section">
               <div class="video-title">Video Testimonial</div>
@@ -447,6 +459,47 @@
       let mediaRecorder = null;
       let recordedChunks = [];
       let recordedBlob = null;
+
+      // ----------------------------------------
+      // Save and restore form data
+      // ----------------------------------------
+      const nameInput = document.getElementById("name");
+      const companyInput = document.getElementById("company");
+      const serviceInput = document.getElementById("service");
+
+      const FORM_STORAGE_KEY = "gomaaneKFeedbackForm";
+
+      function saveFormData() {
+        const formData = {
+          name: nameInput.value,
+          company: companyInput.value,
+          service: serviceInput.value
+        };
+
+        localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(formData));
+      }
+
+      function restoreFormData() {
+        const savedData = localStorage.getItem(FORM_STORAGE_KEY);
+
+        if (!savedData) return;
+
+        try {
+          const formData = JSON.parse(savedData);
+
+          nameInput.value = formData.name || "";
+          companyInput.value = formData.company || "";
+          serviceInput.value = formData.service || "";
+        } catch (error) {
+          console.error("Could not restore saved form data:", error);
+        }
+      }
+
+      nameInput.addEventListener("input", saveFormData);
+      companyInput.addEventListener("input", saveFormData);
+      serviceInput.addEventListener("change", saveFormData);
+
+      restoreFormData();
 
       startCameraBtn.addEventListener("click", async () => {
         try {
@@ -543,7 +596,6 @@
           const name = document.getElementById("name").value.trim();
           const company = document.getElementById("company").value.trim();
           const service = document.getElementById("service").value;
-          
           const consent = document.getElementById("consent").checked;
           const submitButton = document.querySelector(".submit-btn");
 
@@ -574,7 +626,6 @@
               name: name,
               company: company,
               service: service,
-              
               consent: "Yes",
               videoBase64: videoBase64,
               videoType: "video/webm",
@@ -592,6 +643,7 @@
             document.getElementById("mainContent").style.display = "none";
             document.getElementById("successMessage").style.display = "block";
             stopCamera();
+            localStorage.removeItem(FORM_STORAGE_KEY);
           } catch (error) {
             console.error(error);
             alert(
