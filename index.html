@@ -99,29 +99,29 @@
         box-shadow: 0 0 0 3px rgba(177, 139, 61, 0.12);
       }
       .google-review-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 15px 20px;
-  background: linear-gradient(135deg, #b18b3d, #8f6d2d);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 13px;
-  font-size: 16px;
-  font-weight: 700;
-  transition: 0.2s ease;
-  box-shadow: 0 8px 20px rgba(177, 139, 61, 0.2);
-}
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 15px 20px;
+        background: linear-gradient(135deg, #b18b3d, #8f6d2d);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 13px;
+        font-size: 16px;
+        font-weight: 700;
+        transition: 0.2s ease;
+        box-shadow: 0 8px 20px rgba(177, 139, 61, 0.2);
+      }
 
-.google-review-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(177, 139, 61, 0.3);
-}
+      .google-review-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 25px rgba(177, 139, 61, 0.3);
+      }
 
-.google-review-btn:active {
-  transform: translateY(0);
-}
+      .google-review-btn:active {
+        transform: translateY(0);
+      }
       .review-note {
         margin-top: 10px;
         text-align: center;
@@ -355,22 +355,6 @@
               </select>
             </div>
 
-            <div class="form-group">
-              <label>How was your experience with us?<span class="required">*</span></label>
-
-              <a
-                href="https://g.page/r/CdNE_wDuXLbEEBM/review"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="google-review-btn"
-              >
-                ⭐ How was your experience with us?
-              </a>
-
-              <div class="review-note">
-                After submitting your Google Review, return to this page to complete your testimonial.
-              </div>
-            </div>
             <div class="video-section">
               <div class="video-title">Video Testimonial</div>
               <div class="video-description">
@@ -428,6 +412,23 @@
             <button type="submit" class="submit-btn">Submit Your Review</button>
           </form>
         </div>
+        <br /><br />
+        <div class="form-group">
+          <label
+            >How was your experience with us?<span class="required"
+              >*</span
+            ></label
+          >
+
+          <a
+            href="https://g.page/r/CdNE_wDuXLbEEBM/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="google-review-btn"
+          >
+            Please Say Something.....?
+          </a>
+        </div>
 
         <div id="successMessage" class="success">
           <div class="success-icon">✓</div>
@@ -473,7 +474,7 @@
         const formData = {
           name: nameInput.value,
           company: companyInput.value,
-          service: serviceInput.value
+          service: serviceInput.value,
         };
 
         localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(formData));
